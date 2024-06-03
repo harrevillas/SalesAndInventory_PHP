@@ -177,11 +177,9 @@ $user = current_user(); ?>
           <a href="product.php" data-toggle="tooltip" data-placement="bottom" title="Manage Products"><i class="glyphicon glyphicon-th-large"></i> </a>
           <a href="add_product.php" data-toggle="tooltip" data-placement="bottom" title="Add Products"><i class="glyphicon glyphicon-shopping-cart"></i> </a>
           <a href="media.php" data-toggle="tooltip" data-placement="bottom" title="Media Files"><i class="glyphicon glyphicon-picture"></i> </a>
-          <a href="sales.php" data-toggle="tooltip" data-placement="bottom" title="Manage Sales" style="color: #E2A626;"><i class="fas fa-money-bill-alt"></i><span style="font-size: 24px;">&#8369;</span></a>
+          <a href="sales.php" data-toggle="tooltip" data-placement="bottom" title="Manage Sales"><i class="glyphicon glyphicon-indent-right"></i> </a>
           <a href="add_sale.php" data-toggle="tooltip" data-placement="bottom" title="Manage Sales"><i class="glyphicon glyphicon-credit-card"></i> </a>
-          <a href="sales_report.php" data-toggle="tooltip" data-placement="bottom" title="Generate Sales Report"><i class="glyphicon glyphicon-calendar"></i></a>
-          <a href="monthly_sales.php" data-toggle="tooltip" data-placement="bottom" title="Monthly Sales Report"><i class="glyphicon glyphicon-calendar"></i></a>
-          <a href="daily_sales.php" data-toggle="tooltip" data-placement="bottom" title="Daily Sales"><i class="glyphicon glyphicon-calendar"></i></a>
+          <a href="daily_sales.php" data-toggle="tooltip" data-placement="bottom" title="Sales Report"><i class="glyphicon glyphicon-calendar"></i></a>
         </div>
         <div class="header-date pull-left">
           <strong><?php echo date("F j, Y, g:i a"); ?></strong>
