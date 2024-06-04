@@ -101,8 +101,8 @@ if(isset($_POST['update-pass'])) {
                 </select>
             </div>
             <div class="form-group clearfix">
-                    <button type="submit" name="update" class="btn btn-info" style="background-color:blue;">Update</button>
-            </div>
+            <button type="submit" name="update" class="btn btn-info" style="background-color:blue;"><span class="glyphicon glyphicon-edit"></span> Update</button>
+        </div>
         </form>
        </div>
      </div>
@@ -121,8 +121,9 @@ if(isset($_POST['update-pass'])) {
                 <input type="password" class="form-control" name="password" placeholder="Type user new password">
           </div>
           <div class="form-group clearfix">
-                  <button type="submit" name="update-pass" class="btn btn-danger pull-right">Change</button>
+              <button type="submit" name="update-pass" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-refresh"></span> Change</button>
           </div>
+
         </form>
       </div>
     </div>

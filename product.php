@@ -51,6 +51,17 @@ $products = join_product_table();
   .sidebar {
     background-color:  #add8e6;
   }
+
+  tfoot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* Add some margin to the table to prevent it from overlapping with the button */
+  table {
+    margin-bottom: 60px; /* Adjust this value according to your needs */
+  }
 </style>
 
 <a id="top-of-page"></a>
@@ -82,7 +93,7 @@ $products = join_product_table();
               <th> Product Title </th>
               <th class="text-center" style="width: 10%;"> Categories </th>
               <th class="text-center" style="width: 10%;"> In-Stock </th>
-              <th class="text-center" style="width: 10%;"> Selling Price </th>
+              <th class="text-center" style="width: 10%;"> Price </th>
               <th class="text-center" style="width: 10%;"> Product Added </th>
               <th class="text-center" style="width: 100px;"> Actions </th>
             </tr>
@@ -101,6 +112,7 @@ $products = join_product_table();
                 </td>
                 <td> <?php echo remove_junk($product['name']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['categorie']); ?></td>
+                <td class="text-center"><?php echo remove_junk($product['id']); ?></td>
                 <td class="text-center">
                   <?php echo remove_junk($product['quantity']); ?>
                   <!-- Display warning icon if quantity is low -->
@@ -126,7 +138,7 @@ $products = join_product_table();
           <tfoot>
             <tr>
               <td colspan="9" class="text-center">
-                <a href="#top-of-page" class="btn btn-info">
+                <a href="#top-of-page" class="btn btn-info"style="background-color:blue;">
                   <span class="glyphicon glyphicon-arrow-up"></span> Back to Top
                 </a>
               </td>
@@ -161,16 +173,16 @@ $products = join_product_table();
         <h4 class="modal-title">Confirm Deletion</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this product? This action cannot be undone, and all data associated with this product will be permanently deleted.</p>
+        <p>Are you sure you want to delete this product?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" title="Cancel" data-toggle="tooltip" data-placement="top">Cancel</button>
-        <a id="confirmDelete" class="btn btn-danger" href="#" title="Delete" data-toggle="tooltip" data-placement="top">Delete</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal" title="Cancel" data-toggle="tooltip" data-placement="top"><i class="fas fa-times-circle"></i>Cancel</button>
+        <a id="confirmDelete" class="btn btn-danger" href="#" title="Delete" data-toggle="tooltip" data-placement="top"><i class="fas fa-trash-alt"></i>Delete</a>
       </div>
     </div>
   </div>
 </div>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <?php include_once('layouts/footer.php'); ?>
 
 <script>
@@ -178,7 +190,7 @@ $products = join_product_table();
   // Loop through each product with low stock
   $('.low-stock-alert').each(function() {
       // Get the product name and stock quantity
-      var $product = $(this).find('td:nth-child(3)').text(); // Product Title
+      var $product = $(this).find('td:nth-child(4)').text(); // Product Title
       var quantity = $(this).find('td:nth-child(5)').text(); // Stock Quantity
 
       // Display an alert for each product

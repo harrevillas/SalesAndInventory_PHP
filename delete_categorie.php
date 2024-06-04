@@ -7,7 +7,7 @@
   //Find the category by ID
   $categorie = find_by_id('categories',(int)$_GET['id']);
   if(!$categorie){
-    $session->msg("d","Missing Categorie id.");
+    $session->msg("d","Missing Category id.");
     redirect('categorie.php');
   }
   $categoryName = $categorie['name'];
@@ -18,7 +18,7 @@
       $session->msg("s","Category '{$categoryName}' has been deleted.");
       redirect('categorie.php');
   } else {
-      $session->msg("d","Categorie deletion failed.");
+      $session->msg("d","Category deletion failed.");
       redirect('categorie.php');
   }
 ?>

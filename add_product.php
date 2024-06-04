@@ -99,19 +99,6 @@ if (isset($_POST['add_product'])) {
                   </select>
                 </div>
                 <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <select class="form-control" name="product-variant">
-                            <option value="">Select Product Variant</option>
-                            <?php foreach ($all_variants as $var) : ?>
-                                <option value="<?php echo (int)$var['id'] ?>">
-                                    <?php echo $var['name'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
                 <div class="col-md-6">
                   <select class="form-control" name="product-photo">
                     <option value="">Select Product Photo</option>
@@ -154,5 +141,7 @@ if (isset($_POST['add_product'])) {
     </div>
   </div>
 </div>
+
+
 
 <?php include_once('layouts/footer.php'); ?>

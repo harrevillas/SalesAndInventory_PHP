@@ -119,7 +119,7 @@ $all_categories = find_all('categories');
             <tr>
               <td colspan="3" class="text-center">
                 <a href="#top-of-page" class="btn btn-info" style="background-color:blue;">
-                  <span class="glyphicon glyphicon-arrow-up"></span> Back to the Top
+                  <span class="glyphicon glyphicon-arrow-up"></span> Back to Top
                 </a>
               </td>
             </tr>
@@ -211,6 +211,17 @@ $all_categories = find_all('categories');
   .btn-danger:hover {
     background-color: #c82333;
     border-color: #bd2130;
+  }
+
+  tfoot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* Add some margin to the table to prevent it from overlapping with the button */
+  table {
+    margin-bottom: 60px; /* Adjust this value according to your needs */
   }
 </style>
 

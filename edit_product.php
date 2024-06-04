@@ -144,7 +144,7 @@ if (isset($_POST['product'])) {
               </div>
             </div>
           </div>
-          <button type="submit" name="product" class="btn btn-primary"style="background-color:blue;">Update</button>
+          <button type="submit" name="product" class="btn btn-primary"style="background-color:blue;"><span class="glyphicon glyphicon-edit"></span>Update</button>
         </form>
       </div>
     </div>

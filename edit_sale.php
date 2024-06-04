@@ -44,6 +44,15 @@ if(!$sale){
 
 ?>
 <?php include_once('layouts/header.php'); ?>
+<style>
+  .sidebar {
+    background-color:  #add8e6;
+  }
+  
+  body {
+    background-color: #add8e6;
+  }
+  </style>
 <div class="row">
   <div class="col-md-6">
     <?php echo display_msg($msg); ?>
@@ -59,13 +68,16 @@ if(!$sale){
         <span>All Sales</span>
      </strong>
      <div class="pull-right">
-       <a href="sales.php" class="btn btn-primary">Show all sales</a>
+       <a href="sales.php" class="btn btn-primary"style="background-color:blue;">
+         <i class="glyphicon glyphicon-list"></i> Show all sales
+       </a>
      </div>
     </div>
     <div class="panel-body">
        <table class="table table-bordered">
          <thead>
           <th> Product title </th>
+          <th>Variant</th>
           <th> Qty </th>
           <th> Price </th>
           <th> Total </th>
@@ -77,6 +89,10 @@ if(!$sale){
               <form method="post" action="edit_sale.php?id=<?php echo (int)$sale['id']; ?>">
                 <td id="s_name">
                   <input type="text" class="form-control" id="sug_input" name="title" value="<?php echo remove_junk($product['name']); ?>">
+                  <div id="result" class="list-group"></div>
+                </td>
+                <td id="s_variant">
+                  <input type="text" class="form-control" id="name" name="title" value="<?php echo remove_junk($product['id']); ?>">
                   <div id="result" class="list-group"></div>
                 </td>
                 <td id="s_qty">
@@ -92,7 +108,9 @@ if(!$sale){
                   <input type="date" class="form-control datepicker" name="date" data-date-format="" value="<?php echo remove_junk($sale['date']); ?>">
                 </td>
                 <td>
-                  <button type="submit" name="update_sale" class="btn btn-primary">Update sale</button>
+                  <button type="submit" name="update_sale" class="btn btn-primary"style="background-color:blue;">
+                    <i class="glyphicon glyphicon-refresh"></i> Update sale
+                  </button>
                 </td>
               </form>
               </tr>

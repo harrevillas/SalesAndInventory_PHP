@@ -45,12 +45,12 @@
       </a>
     </li>
 
-    <li>
+   <!-- <li>
       <a href="variant.php">
         <i class="glyphicon glyphicon-star"></i>
         <span>Variant</span>
       </a>
-    </li>
+    </li> -->
 
     <li>
       <a href="product.php">

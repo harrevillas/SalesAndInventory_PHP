@@ -63,7 +63,7 @@ if(isset($_POST['edit_cat'])){
            <div class="form-group">
                <input type="text" class="form-control" name="variant-name" value="<?php echo remove_junk(ucfirst($variant['name']));?>">
            </div>
-           <button type="submit" name="edit_cat" class="btn btn-primary"style="background-color:blue;">Update Variant</button>
+           <button type="submit" name="edit_cat" class="btn btn-primary"style="background-color:blue;"><span class="glyphicon glyphicon-edit"></span>Update Variant</button>
        </form>
        </div>
      </div>

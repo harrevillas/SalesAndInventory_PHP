@@ -63,11 +63,14 @@
             <div class="col-md-8">
               <form class="form" action="edit_account.php" method="POST" enctype="multipart/form-data">
               <div class="form-group">
-                <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file"/>
-              </div>
+              <label for="file_upload" class="btn btn-default btn-file">Choose Photo</label>
+              <input type="file" name="file_upload" id="file_upload" multiple="multiple" style="display: none;"/>
+            </div>
+
               <div class="form-group">
-                <input type="hidden" name="user_id" value="<?php echo $user['id'];?>">
-                 <button type="submit" name="submit" class="btn btn-warning">Change</button>
+              <button type="submit" name="submit" class="btn btn-warning">
+                <span class="glyphicon glyphicon-picture"></span> Change
+              </button>
               </div>
              </form>
             </div>
@@ -92,8 +95,12 @@
                   <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
             </div>
             <div class="form-group clearfix">
-                    <a href="change_password.php" title="change password" class="btn btn-danger pull-right">Change Password</a>
-                    <button type="submit" name="update" class="btn btn-info">Update</button>
+              <a href="change_password.php" title="Change Password" class="btn btn-danger pull-right">
+                <span class="glyphicon glyphicon-lock"></span> Change Password
+              </a>
+              <button type="submit" name="update" class="btn btn-info">
+                <span class="glyphicon glyphicon-refresh"></span> Update
+              </button>
             </div>
         </form>
       </div>
@@ -101,5 +108,14 @@
   </div>
 </div>
 
+<style>
+  .sidebar {
+    background-color:  #add8e6;
+  }
+  
+  body {
+    background-color: #add8e6;
+  }
+</style>
 
 <?php include_once('layouts/footer.php'); ?>

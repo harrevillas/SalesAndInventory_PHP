@@ -15,7 +15,7 @@ $all_variant = find_all('variant');
     $sql  = "INSERT INTO variant (name)";
     $sql .= " VALUES ('{$cat_name}')"; 
       if($db->query($sql)){
-        $session->msg("s", "Successfully Added New Category");
+        $session->msg("s", "Successfully Added New Variant");
         redirect('variant.php',false);
       } else {
         $session->msg("d", "Sorry Failed to insert.");
@@ -139,14 +139,14 @@ $all_variant = find_all('variant');
         <h4 class="modal-title">Confirm Deletion</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this variant? All products data inside this variant will also be deleted. This action cannot be undone.</p>
+        <p>Are you sure you want to delete this variant?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Cancel" data-toggle="tooltip" data-placement="top">
-          <i class="bi bi-x-circle"></i> Cancel
+        <i class="fas fa-times-circle"></i> Cancel
         </button>
         <a id="confirmDelete" class="btn btn-danger" href="#" title="Delete" data-toggle="tooltip" data-placement="top">
-          <i class="bi bi-trash"></i> Delete
+        <i class="fas fa-trash-alt"></i> Delete
         </a>
       </div>
     </div>
@@ -158,7 +158,7 @@ $all_variant = find_all('variant');
   .modal-dialog-centered {
     display: flex;
     align-items: center;
-    min-height: calc(100% - 1rem);
+    min-height: calc(100%  1rem);
   }
 
   .modal-content {

@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" name="submit" class="btn btn-primary">
+            <button type="submit" name="submit" class="btn btn-primary"style="background-color:blue;">
               <span class="glyphicon glyphicon-print"></span> Generate Report
             </button>
           </div>

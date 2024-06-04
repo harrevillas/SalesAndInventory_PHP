@@ -47,7 +47,7 @@ page_require_level(1);
 <div class="welcome-container">
   <img src="libs/images/seles.png" alt="">
   <div class="welcome-text">
-    WELCOME
+    WELCOME ADMIN
   </div>
 </div>
 

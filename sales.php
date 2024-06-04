@@ -57,6 +57,17 @@ $sales = find_all_sale();
   .sidebar {
     background-color:  #add8e6;
   }
+
+  tfoot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* Add some margin to the table to prevent it from overlapping with the button */
+  table {
+    margin-bottom: 60px; /* Adjust this value according to your needs */
+  }
 </style>
 
 <a id="top-of-page"></a>

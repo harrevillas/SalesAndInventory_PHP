@@ -71,6 +71,18 @@ if (isset($_POST['submit'])) {
   .sidebar {
     background-color:  #add8e6;
   }
+
+  tfoot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* Add some margin to the table to prevent it from overlapping with the button */
+  table {
+    margin-bottom: 60px; /* Adjust this value according to your needs */
+  }
+
 </style>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -93,9 +105,13 @@ if (isset($_POST['submit'])) {
           <form class="form-inline" action="media.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <div class="input-group">
+              <div class="input-group">
                 <span class="input-group-btn">
-                  <input type="file" name="file_upload" id="file_upload" multiple="multiple" class="btn btn-primary btn-file" title="Only .jpeg/.jpg/.png files are allowed." />
+                  <label for="file_upload" class="btn btn-primary btn-file">Choose an Image</label>
                 </span>
+                <input type="file" name="file_upload" id="file_upload" multiple="multiple" class="form-control" title="Only .jpeg/.jpg/.png files are allowed." style="display: none;" />
+              </div>
+
                 <button type="submit" name="submit" id="submit_button" class="btn btn-default">
                   <span class="glyphicon glyphicon-folder-open" id="icon_choose_file"></span>Upload Photo
                 </button>
@@ -178,12 +194,13 @@ if (isset($_POST['submit'])) {
         <p>Are you sure you want to delete this photo?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" title="Cancel" data-toggle="tooltip" data-placement="top">Cancel</button>
-        <a id="confirmDelete" class="btn btn-danger" href="#" title="Delete" data-toggle="tooltip" data-placement="top">Delete</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal" title="Cancel" data-toggle="tooltip" data-placement="top"><i class="fas fa-times-circle"></i>Cancel</button>
+        <a id="confirmDelete" class="btn btn-danger" href="#" title="Delete" data-toggle="tooltip" data-placement="top"> <i class="fas fa-trash-alt"></i>Delete</a>
       </div>
     </div>
   </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <script>
   $(document).on('click', '.btn-delete-media', function() {

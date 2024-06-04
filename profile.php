@@ -28,4 +28,14 @@
        </div>
    </div>
 </div>
+
+<style>
+  .sidebar {
+    background-color:  #add8e6;
+  }
+  
+  body {
+    background-color: #add8e6;
+  }
+</style>
 <?php include_once('layouts/footer.php'); ?>
