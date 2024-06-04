@@ -57,7 +57,7 @@
           <div class="input-group">
             <span class="input-group-btn">
               <button type="submit" class="btn btn-primary"style="background-color:blue;">
-              <span class="glyphicon glyphicon-search"></span> Find It
+              <span class="glyphicon glyphicon-plus-sign"></span> Add Sale
               </button>
             </span>
             <input type="text" id="sug_input" class="form-control" name="title"  placeholder="Search for product name">

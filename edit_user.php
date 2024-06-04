@@ -16,15 +16,16 @@
 <?php
 //Update User basic info
   if(isset($_POST['update'])) {
-    $req_fields = array('name','username','level');
+    $req_fields = array('name','username','contact','level');
     validate_fields($req_fields);
     if(empty($errors)){
              $id = (int)$e_user['id'];
            $name = remove_junk($db->escape($_POST['name']));
        $username = remove_junk($db->escape($_POST['username']));
+       $contact = remove_junk($db->escape($_POST['contact']));
           $level = (int)$db->escape($_POST['level']);
        $status   = remove_junk($db->escape($_POST['status']));
-            $sql = "UPDATE users SET name ='{$name}', username ='{$username}',user_level='{$level}',status='{$status}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE users SET name ='{$name}', username ='{$username}',contact = '{$contact}',user_level='{$level}',status='{$status}' WHERE id='{$db->escape($id)}'";
          $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
             $session->msg('s',"Acount Updated ");
@@ -84,6 +85,10 @@ if(isset($_POST['update-pass'])) {
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
                   <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
+            </div>
+            <div class="form-group">
+                  <label for="contact" class="control-label">Contact</label>
+                  <input type="text" class="form-control" name="contact" value="<?php echo remove_junk(ucwords($e_user['contact'])); ?>">
             </div>
             <div class="form-group">
               <label for="level">User Role</label>

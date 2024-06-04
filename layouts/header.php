@@ -176,6 +176,8 @@ $user = current_user(); ?>
         <a href="product.php" data-toggle="tooltip" data-placement="bottom" title="Manage Products"><i class="glyphicon glyphicon-th-large"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
         <a href="add_product.php" data-toggle="tooltip" data-placement="bottom" title="Add Products"><i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
         <a href="media.php" data-toggle="tooltip" data-placement="bottom" title="Media Files"><i class="glyphicon glyphicon-picture"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="sales.php" data-toggle="tooltip" data-placement="bottom" title="Manage Sales"><i class="glyphicon glyphicon-indent-right"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="add_sale.php" data-toggle="tooltip" data-placement="bottom" title="Manage Sales"><i class="glyphicon glyphicon-credit-card"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
         <a href="daily_sales.php" data-toggle="tooltip" data-placement="bottom" title="Sales Report"><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
       </div>
 

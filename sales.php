@@ -112,7 +112,7 @@ $sales = find_all_sale();
                 <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
                 <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>
                 <td class="text-center"><?php echo $sale['date']; ?></td>
-                <td class="text-center">
+                <td class="text-center"> 
                   <div class="btn-group btn-group-vertical">
                     <a href="edit_sale.php?id=<?php echo (int)$sale['id']; ?>" class="btn btn-edit-sale btn-xs" title="Edit" data-toggle="tooltip">
                       <span class="glyphicon glyphicon-edit"></span>Edit 

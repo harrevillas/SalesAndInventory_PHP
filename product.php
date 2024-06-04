@@ -112,12 +112,11 @@ $products = join_product_table();
                 </td>
                 <td> <?php echo remove_junk($product['name']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['categorie']); ?></td>
-                <td class="text-center"><?php echo remove_junk($product['id']); ?></td>
                 <td class="text-center">
                   <?php echo remove_junk($product['quantity']); ?>
                   <!-- Display warning icon if quantity is low -->
                   <?php if ($product['quantity'] <= 10) : ?>
-                    <span class="glyphicon glyphicon-warning-sign" title="Low Stock"></span>
+                    <span class="glyphicon glyphicon-alert" title="Low Stock"></span>
                   <?php endif; ?> 
                 <td class="text-center"> <?php echo remove_junk($product['sale_price']); ?></td>
                 <td class="text-center"> <?php echo read_date($product['date']); ?></td>
@@ -186,17 +185,17 @@ $products = join_product_table();
 <?php include_once('layouts/footer.php'); ?>
 
 <script>
-  $(document).ready(function() {
+ // $(document).ready(function() {
   // Loop through each product with low stock
-  $('.low-stock-alert').each(function() {
+ // $('.low-stock-alert').each(function() {
       // Get the product name and stock quantity
-      var $product = $(this).find('td:nth-child(4)').text(); // Product Title
-      var quantity = $(this).find('td:nth-child(5)').text(); // Stock Quantity
+    //  var $product = $(this).find('td:nth-child(4)').text(); // Product Title
+    //  var quantity = $(this).find('td:nth-child(5)').text(); // Stock Quantity
 
       // Display an alert for each product
-      alert('Low stock alert!\n\nProduct: ' + $product + '\nStock Quantity:'+quantity);
-  });
-});
+   //   alert('Low stock alert!\n\nProduct: ' + $product + '\nStock Quantity:'+quantity);
+ // });
+//}); 
 
   // Initialize tooltips for all elements
   $('[data-toggle="tooltip"]').tooltip();

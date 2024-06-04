@@ -24,18 +24,20 @@ function find_by_sql($sql)
 /*--------------------------------------------------------------*/
 /*  Function for Find data from table by id
 /*--------------------------------------------------------------*/
-function find_by_id($table,$id)
-{
+function find_by_id($table, $id) {
   global $db;
   $id = (int)$id;
-    if(tableExists($table)){
-          $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE id='{$db->escape($id)}' LIMIT 1");
-          if($result = $db->fetch_assoc($sql))
-            return $result;
-          else
-            return null;
-     }
+  if (tableExists($table)) {
+    $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE id='{$db->escape($id)}' LIMIT 1");
+    if ($result = $db->fetch_assoc($sql)) {
+      return $result;
+    } else {
+      return null;
+    }
+  }
+  return null;
 }
+
 /*--------------------------------------------------------------*/
 /* Function for Delete data from table by id
 /*--------------------------------------------------------------*/
@@ -132,17 +134,18 @@ function find_by_username($username) {
   /*--------------------------------------------------------------*/
   /* Find current log in user by session id
   /*--------------------------------------------------------------*/
-  function current_user(){
-      static $current_user;
-      global $db;
-      if(!$current_user){
-         if(isset($_SESSION['user_id'])):
-             $user_id = intval($_SESSION['user_id']);
-             $current_user = find_by_id('users',$user_id);
-        endif;
+  function current_user() {
+    static $current_user;
+    global $db;
+    if (!$current_user) {
+      if (isset($_SESSION['user_id'])) {
+        $user_id = intval($_SESSION['user_id']);
+        $current_user = find_by_id('users', $user_id);
       }
+    }
     return $current_user;
   }
+  
   /*--------------------------------------------------------------*/
   /* Find all user by
   /* Joining users table and user gropus table
@@ -150,7 +153,7 @@ function find_by_username($username) {
   function find_all_user(){
       global $db;
       $results = array();
-      $sql = "SELECT u.id,u.name,u.username,u.user_level,u.status,u.last_login,";
+      $sql = "SELECT u.id,u.name,u.username,u.contact, u.user_level,u.status,u.last_login,";
       $sql .="g.group_name ";
       $sql .="FROM users u ";
       $sql .="LEFT JOIN user_groups g ";
@@ -359,5 +362,7 @@ function  monthlySales($year){
   $sql .= " ORDER BY date_format(s.date, '%c' ) ASC";
   return find_by_sql($sql);
 }
+
+
 
 ?>

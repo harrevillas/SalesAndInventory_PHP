@@ -1,26 +1,34 @@
 <?php
+
 $page_title = 'Add User';
 require_once('includes/load.php');
 // Checking What level user has permission to view this page
 page_require_level(1);
 $groups = find_all('user_groups');
-?>
-<?php
+
 if (isset($_POST['add_user'])) {
 
-  $req_fields = array('full-name', 'username', 'password', 'level');
+  $req_fields = array('full-name', 'username', 'password', 'contact', 'level');
   validate_fields($req_fields);
 
   if (empty($errors)) {
-    $name   = remove_junk($db->escape($_POST['full-name']));
-    $username   = remove_junk($db->escape($_POST['username']));
-    $password   = remove_junk($db->escape($_POST['password']));
-    $user_level = (int)$db->escape($_POST['level']);
-    $password = sha1($password);
+    $name      = remove_junk($db->escape($_POST['full-name']));
+    $username  = remove_junk($db->escape($_POST['username']));
+    $password  = remove_junk($db->escape($_POST['password']));
+    $contact   = remove_junk($db->escape($_POST['contact']));
+    $user_level= (int)$db->escape($_POST['level']);
+
+    // Validate contact field
+    if (!is_numeric($contact) || strlen($contact) != 11) {
+      $session->msg('d', 'Contact must be a numerical value with 11 digits.');
+      redirect('add_user.php', false);
+    }
+
+    $password  = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO users (";
-    $query .= "name,username,password,user_level,status";
+    $query .= "name,username,password,contact, user_level,status";
     $query .= ") VALUES (";
-    $query .= " '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
+    $query .= " '{$name}', '{$username}', '{$password}', '{$contact}', '{$user_level}','1'";
     $query .= ")";
     if ($db->query($query)) {
       // Success
@@ -36,6 +44,7 @@ if (isset($_POST['add_user'])) {
     redirect('add_user.php', false);
   }
 }
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 <?php echo display_msg($msg); ?>
@@ -52,15 +61,19 @@ if (isset($_POST['add_user'])) {
         <form method="post" action="add_user.php">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" name="full-name" placeholder="Enter Full Name" oninput="allowLettersOnly(event)">
+            <input type="text" class="form-control" name="full-name" placeholder="Enter Full Name">
           </div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" placeholder="Enter Username" oninput="allowLettersOnly(event)">
+            <input type="text" class="form-control" name="username" placeholder="Enter Username">
           </div>
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" placeholder="Enter Password">
+          </div>
+          <div class="form-group">
+            <label for="contact">Contact</label>
+            <input type="text" class="form-control" name="contact" placeholder="Enter Contact">
           </div>
           <div class="form-group">
             <label for="level">User Role</label>
@@ -81,60 +94,4 @@ if (isset($_POST['add_user'])) {
   </div>
 </div>
 
-<style>
-  body {
-    background-color: #add8e6;
-    font-family: Arial, sans-serif;
-  }
-
-  .sidebar{
-    background-color: #add8e6;
-  }
-
-  .panel-heading {
-    background-color: #007bff;
-    color: white;
-    padding: 15px;
-    border-radius: 5px 5px 0 0;
-  }
-
-  .panel-heading strong {
-    font-size: 20px;
-  }
-
-  .panel-body {
-    padding: 20px;
-  }
-
-  .form-group label {
-    font-weight: bold;
-  }
-
-  .form-control {
-    border-radius: 5px;
-    border-color: #ccc;
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 10px 20px;
-    font-weight: bold;
-  }
-
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-</style>
-
 <?php include_once('layouts/footer.php'); ?>
-
-<script>
-  function allowLettersOnly(event) {
-    var inputValue = event.target.value;
-    var lettersOnly = inputValue.replace(/[0-9]/g, '');
-    event.target.value = lettersOnly;
-  }
-</script>
