@@ -170,7 +170,7 @@ $user = current_user(); ?>
      
 
         <div class="header-navigation">
-        <a href="admin.php" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        <a href="admin.php" data-toggle="tooltip" da  ta-placement="bottom" title="Dashboard"><i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
         <a href="users.php" data-toggle="tooltip" data-placement="bottom" title="Users"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
         <a href="categorie.php" data-toggle="tooltip" data-placement="bottom" title="Categories"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
         <a href="product.php" data-toggle="tooltip" data-placement="bottom" title="Manage Products"><i class="glyphicon glyphicon-th-large"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -219,9 +219,6 @@ $user = current_user(); ?>
     <div class="sidebar">
       <?php if ($user['user_level'] === '1') : ?>
         <?php include_once('admin_menu.php'); ?>
-
-      <?php elseif ($user['user_level'] === '2') : ?>
-        <?php include_once('special_menu.php'); ?>
 
       <?php elseif ($user['user_level'] === '3') : ?>
         <?php include_once('user_menu.php'); ?>

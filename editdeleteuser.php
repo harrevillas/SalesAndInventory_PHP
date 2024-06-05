@@ -130,12 +130,12 @@
            <td><?php echo read_date($a_user['last_login'])?></td>
            <td class="text-center">
              <div class="btn-group btn-group-vertical">
-                <a href="edituserotp.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs" data-toggle="tooltip" title="Edit">
+                <a href="otpedituser.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs" data-toggle="tooltip" title="Edit">
                 
                   <i class="glyphicon glyphicon-pencil"></i> Edit 
                </a>
                <!-- Confirmation Before Deletion-->
-                <a href="deleteuserotp.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs" data-toggle="tooltip" title="Remove" onclick="return confirm('Are you sure you want to delete this user?');">
+                <a href="otpedituser.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs" data-toggle="tooltip" title="Remove" onclick="return confirm('Are you sure you want to delete this user?');">
                   <i class="glyphicon glyphicon-remove"></i> Delete
                 </a>
                 </div>

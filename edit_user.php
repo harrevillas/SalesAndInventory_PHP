@@ -27,6 +27,20 @@
        $status   = remove_junk($db->escape($_POST['status']));
             $sql = "UPDATE users SET name ='{$name}', username ='{$username}',contact = '{$contact}',user_level='{$level}',status='{$status}' WHERE id='{$db->escape($id)}'";
          $result = $db->query($sql);
+                if (!is_numeric($contact) || strlen($contact) != 11) {
+            $session->msg('d', 'Contact must be a numerical value with 11 digits.');
+            redirect('edit_user.php?id='.(int)$e_user['id'],false);
+          }
+
+          if (!preg_match('/^[a-zA-Z]+$/', $name)) {
+            $session->msg("d", "Name can only contain alphabetical characters.");
+            redirect('edit_user.php?id='.(int)$e_user['id'],false);
+        }
+
+        if (!preg_match('/^[a-zA-Z]+$/', $username)) {
+          $session->msg("d", "Username can only contain alphabetical characters.");
+          redirect('edit_user.php?id='.(int)$e_user['id'],false);
+      }
           if($result && $db->affected_rows() === 1){
             $session->msg('s',"Acount Updated ");
             redirect('edit_user.php?id='.(int)$e_user['id'], false);
@@ -38,6 +52,7 @@
       $session->msg("d", $errors);
       redirect('edit_user.php?id='.(int)$e_user['id'],false);
     }
+     // Validate contact field
   }
 ?>
 <?php

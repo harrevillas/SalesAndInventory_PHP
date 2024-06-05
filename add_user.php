@@ -24,6 +24,16 @@ if (isset($_POST['add_user'])) {
       redirect('add_user.php', false);
     }
 
+    if (!preg_match('/^[a-zA-Z]+$/', $name)) {
+      $session->msg("d", "Name can only contain alphabetical characters.");
+      redirect('add_user.php', false);
+  }
+
+  if (!preg_match('/^[a-zA-Z]+$/', $username)) {
+    $session->msg("d", "Username can only contain alphabetical characters.");
+    redirect('add_user.php', false);
+}
+    
     $password  = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO users (";
     $query .= "name,username,password,contact, user_level,status";
@@ -61,7 +71,7 @@ if (isset($_POST['add_user'])) {
         <form method="post" action="add_user.php">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" name="full-name" placeholder="Enter Full Name">
+            <input type="text" class="form-control" name="full-name" placeholder="Enter Name">
           </div>
           <div class="form-group">
             <label for="username">Username</label>
@@ -93,5 +103,16 @@ if (isset($_POST['add_user'])) {
     </div>
   </div>
 </div>
+
+<style>
+  body{
+    background-color: #add8e6;
+  }
+
+  .sidebar{
+    background-color: #add8e6;
+  }
+
+
 
 <?php include_once('layouts/footer.php'); ?>
