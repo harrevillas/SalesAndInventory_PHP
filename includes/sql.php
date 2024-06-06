@@ -153,7 +153,7 @@ function find_by_username($username) {
   function find_all_user(){
       global $db;
       $results = array();
-      $sql = "SELECT u.id,u.name,u.username,u.contact, u.user_level,u.status,u.last_login,";
+      $sql = "SELECT u.id,u.name,u.username,u.contact, u.gmail, u.user_level,u.status,u.last_login,";
       $sql .="g.group_name ";
       $sql .="FROM users u ";
       $sql .="LEFT JOIN user_groups g ";
@@ -222,7 +222,7 @@ function find_by_username($username) {
    /*--------------------------------------------------------------*/
   function join_product_table(){
      global $db;
-     $sql  =" SELECT p.id,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.date,c.name";
+     $sql  =" SELECT p.id,p.code,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.date,c.name";
     $sql  .=" AS categorie,m.file_name AS image";
     $sql  .=" FROM products p";
     $sql  .=" LEFT JOIN categories c ON c.id = p.categorie_id";
@@ -243,6 +243,7 @@ function find_by_username($username) {
      $result = find_by_sql($sql);
      return $result;
    }
+
 
   /*--------------------------------------------------------------*/
   /* Function for Finding all product info by product title
@@ -273,7 +274,7 @@ function find_by_username($username) {
   /*--------------------------------------------------------------*/
  function find_recent_product_added($limit){
    global $db;
-   $sql   = " SELECT p.id,p.name,p.sale_price,p.media_id,c.name AS categorie,";
+   $sql   = " SELECT p.id,p.code,p.name,p.sale_price,p.media_id,c.name AS categorie,";
    $sql  .= "m.file_name AS image FROM products p";
    $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
    $sql  .= " LEFT JOIN media m ON m.id = p.media_id";

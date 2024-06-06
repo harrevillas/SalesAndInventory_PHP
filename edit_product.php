@@ -22,10 +22,21 @@ if (!$product) {
 }
 
 if (isset($_POST['product'])) {
-  $req_fields = array('product-title', 'product-categorie', 'product-quantity', 'saleing-price');
+  $req_fields = array('product-code','product-title', 'product-categorie', 'product-quantity', 'saleing-price');
   validate_fields($req_fields);
 
+  if (!preg_match('/^[0-9]+$/', $_POST['product-code'])) {
+    $session->msg('d', 'Product code can only contain numerical values.');
+    redirect('product.php', false);
+  }
+  // Validate product title format
+  if (!preg_match('/^[a-zA-Z]+$/', $_POST['product-title'])) {
+    $session->msg('d', 'Product title can only contain alphabetical characters.');
+    redirect('product.php', false);
+  }
+
   if (empty($errors)) {
+    $p_code  = remove_junk($db->escape($_POST['product-code']));
     $p_name  = remove_junk($db->escape($_POST['product-title']));
     $p_cat   = (int)$_POST['product-categorie'];
     $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
@@ -36,7 +47,7 @@ if (isset($_POST['product'])) {
       $media_id = remove_junk($db->escape($_POST['product-photo']));
     }
     $query   = "UPDATE products SET";
-    $query  .= " name ='{$p_name}', quantity ='{$p_qty}',";
+    $query  .= " code ='{$p_code}', name ='{$p_name}', quantity ='{$p_qty}',";
     $query  .= " buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}'";
     $query  .= " WHERE id ='{$product['id']}'";
     $result = $db->query($query);
@@ -89,6 +100,12 @@ if (isset($_POST['product'])) {
                 <i class="glyphicon glyphicon-th-large"></i>
               </span>
               <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product['name']); ?>">
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-th-large"></i>
+              </span>
+              <input type="text" class="form-control" name="product-code" value="<?php echo remove_junk($product['code']); ?>">
             </div>
           </div>
           <div class="form-group">

@@ -89,6 +89,7 @@ $products = join_product_table();
           <thead>
             <tr>
               <th class="text-center" style="width: 50px;">#</th>
+              <th>Product Code</th>
               <th> Photo</th>
               <th> Product Title </th>
               <th class="text-center" style="width: 10%;"> Categories </th>
@@ -103,6 +104,7 @@ $products = join_product_table();
               <!-- Check if product quantity is low and apply alert class -->
               <tr <?php echo ($product['quantity'] <= 10) ? 'class="low-stock-alert"' : ''; ?>>
                 <td class="text-center"><?php echo count_id(); ?></td>
+                <td> <?php echo remove_junk($product['code']); ?></td>
                 <td>
                   <?php if ($product['media_id'] === '0') : ?>
                     <img class="img-avatar img-circle product-image" src="uploads/products/no_image.png" alt="" title="View Image" data-toggle="tooltip">
@@ -122,13 +124,13 @@ $products = join_product_table();
                 <td class="text-center"> <?php echo read_date($product['date']); ?></td>
                 <td class="text-center">
                   <div class="btn-group btn-group-vertical">
-                    <a href="edit_product.php?id=<?php echo (int)$product['id']; ?>" class="btn btn-xs" title="Edit" data-toggle="tooltip">
+                    <a href="verify_editproduct.php?id=<?php echo (int)$product['id']; ?>" class="btn btn-xs" title="Edit" data-toggle="tooltip">
                       <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
                     <!-- this button will trigger modal for deletion-->
-                    <button type="button" class="btn btn-xs" title="Delete" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo (int)$product['id']; ?>">
-                      <span class="glyphicon glyphicon-trash"></span> Delete
-                    </button>
+                    <a href="verify_deleteproduct.php?id=<?php echo (int)$product['id']; ?>" class="btn btn-xs" title="Edit" data-toggle="tooltip">
+                      <span class="glyphicon glyphicon-edit"></span> Delete
+                    </a>
                   </div>
                 </td>
               </tr>

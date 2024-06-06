@@ -1,5 +1,3 @@
-
-
 <?php
 // Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
@@ -68,15 +66,15 @@ if (isset($_POST["register"])) {
         $sql = "INSERT INTO verify(name, email, password, verification_code, email_verified_at) VALUES ('" . $name . "', '" . $email . "', '" . $encrypted_password . "', '" . $verification_code . "', NULL)";
         mysqli_query($conn, $sql);
 
-        header("Location: otpedituser.php?id=" . $_GET['id'] . "&email=" . $email);
+        header("Location: otp_edituser.php?id=" . $_GET['id'] . "&email=" . $email);
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
 ?>
-   
-   <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -111,14 +109,34 @@ if (isset($_POST["register"])) {
     <div class="container">
         <h2 class="text-center">Verify Your Email</h2>
         <form method="POST">
-           
             <div class="form-group">
                 <label for="email">Email:</label>
                 <select name="email" id="email" class="form-control" required>
-                    <option value="revillasharlene92816@gmail.com">revillasharlene92816@gmail.com</option>
+                    <?php
+                    session_start();
+
+                    // Connect to the database
+                    $conn = mysqli_connect("localhost", "root", "", "salesandinventory");
+                    if (!$conn) {
+                        die("Connection failed: " . mysqli_connect_error());
+                    }
+
+                          // Fetch email addresses
+                        $user_id = $_SESSION['user_id'];
+                        $result = mysqli_query($conn, "SELECT gmail FROM users WHERE id = $user_id");
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<option value="' . htmlspecialchars($row['gmail']) . '">' . htmlspecialchars($row['gmail']) . '</option>';
+                            }
+                        } else {
+                            echo '<option value="">No user found</option>';
+                        }
+
+
+                    mysqli_close($conn);
+                    ?>
                 </select>
             </div>
-           
             <button type="submit" name="register" class="btn btn-primary btn-block">Verify Email</button>
         </form>
     </div>

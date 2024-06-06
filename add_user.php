@@ -8,7 +8,7 @@ $groups = find_all('user_groups');
 
 if (isset($_POST['add_user'])) {
 
-  $req_fields = array('full-name', 'username', 'password', 'contact', 'level');
+  $req_fields = array('full-name', 'username', 'password', 'contact', 'gmail', 'level');
   validate_fields($req_fields);
 
   if (empty($errors)) {
@@ -16,6 +16,7 @@ if (isset($_POST['add_user'])) {
     $username  = remove_junk($db->escape($_POST['username']));
     $password  = remove_junk($db->escape($_POST['password']));
     $contact   = remove_junk($db->escape($_POST['contact']));
+    $gmail   = remove_junk($db->escape($_POST['gmail']));
     $user_level= (int)$db->escape($_POST['level']);
 
     // Validate contact field
@@ -27,18 +28,18 @@ if (isset($_POST['add_user'])) {
     if (!preg_match('/^[a-zA-Z]+$/', $name)) {
       $session->msg("d", "Name can only contain alphabetical characters.");
       redirect('add_user.php', false);
-  }
+    }
 
-  if (!preg_match('/^[a-zA-Z]+$/', $username)) {
-    $session->msg("d", "Username can only contain alphabetical characters.");
-    redirect('add_user.php', false);
-}
+    if (!preg_match('/^[a-zA-Z]+$/', $username)) {
+      $session->msg("d", "Username can only contain alphabetical characters.");
+      redirect('add_user.php', false);
+    }
     
     $password  = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO users (";
-    $query .= "name,username,password,contact, user_level,status";
+    $query .= "name,username,password,contact,gmail, user_level,status";
     $query .= ") VALUES (";
-    $query .= " '{$name}', '{$username}', '{$password}', '{$contact}', '{$user_level}','1'";
+    $query .= " '{$name}', '{$username}', '{$password}', '{$contact}','{$gmail}', '{$user_level}','1'";
     $query .= ")";
     if ($db->query($query)) {
       // Success
@@ -68,25 +69,29 @@ if (isset($_POST['add_user'])) {
     </div>
     <div class="panel-body">
       <div class="col-md-6">
-        <form method="post" action="add_user.php">
+        <form id="userForm" method="post" action="add_user.php">
           <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">Name <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="full-name" placeholder="Enter Name">
           </div>
           <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">Username <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="username" placeholder="Enter Username">
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Password <span class="text-danger">*</span></label>
             <input type="password" class="form-control" name="password" placeholder="Enter Password">
           </div>
           <div class="form-group">
-            <label for="contact">Contact</label>
+            <label for="contact">Contact <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="contact" placeholder="Enter Contact">
           </div>
           <div class="form-group">
-            <label for="level">User Role</label>
+            <label for="gmail">Email <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="gmail" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+            <label for="level">User Role <span class="text-danger">*</span></label>
             <select class="form-control" name="level">
               <?php foreach ($groups as $group) : ?>
                 <option value="<?php echo $group['group_level']; ?>"><?php echo ucwords($group['group_name']); ?></option>
@@ -105,14 +110,38 @@ if (isset($_POST['add_user'])) {
 </div>
 
 <style>
-  body{
+  body {
     background-color: #add8e6;
   }
 
-  .sidebar{
+  .sidebar {
     background-color: #add8e6;
   }
 
+  .text-danger {
+    color: red;
+  }
+</style>
 
+<script>
+  document.getElementById('userForm').addEventListener('submit', function(event) {
+    var form = event.target;
+    var isValid = true;
+    var requiredFields = form.querySelectorAll('[name="full-name"], [name="username"], [name="password"], [name="contact"], [name="gmail"], [name="level"]');
+    
+    requiredFields.forEach(function(field) {
+      if (field.value.trim() === '') {
+        isValid = false;
+        field.nextElementSibling.textContent = 'This field is required';
+      } else {
+        field.nextElementSibling.textContent = '';
+      }
+    });
+
+    if (!isValid) {
+      event.preventDefault();
+    }
+  });
+</script>
 
 <?php include_once('layouts/footer.php'); ?>

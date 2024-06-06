@@ -148,9 +148,9 @@ if (isset($_POST['submit'])) {
                   <?php echo $media_file['file_type']; ?>
                 </td>
                 <td class="text-center">
-                  <button type="button" class="btn btn-danger btn-xs btn-delete-media" title="Delete" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo (int) $media_file['id']; ?>">
-                    <span class="glyphicon glyphicon-trash"></span> Delete
-                  </button>
+                <a href="verify_deletemedia.php?id=<?php echo (int)$media_file['id']; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit">
+                      <span class="glyphicon glyphicon-edit"></span> Delete
+                    </a>
                 </td>
               </tr>
             <?php endforeach; ?>

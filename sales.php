@@ -101,7 +101,7 @@ $sales = find_all_sale();
               <th class="text-center" style="width: 15%;">Quantity</th>
               <th class="text-center" style="width: 15%;">Total</th>
               <th class="text-center" style="width: 15%;">Date</th>
-              <th class="text-center" style="width: 100px;">Actions</th>
+         
             </tr>
           </thead>
           <tbody>
@@ -112,15 +112,15 @@ $sales = find_all_sale();
                 <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
                 <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>
                 <td class="text-center"><?php echo $sale['date']; ?></td>
-                <td class="text-center"> 
-                  <div class="btn-group btn-group-vertical">
+              
+                  <!--<div class="btn-group btn-group-vertical">
                     <a href="edit_sale.php?id=<?php echo (int)$sale['id']; ?>" class="btn btn-edit-sale btn-xs" title="Edit" data-toggle="tooltip">
                       <span class="glyphicon glyphicon-edit"></span>Edit 
                     </a>
                     <button type="button" class="btn btn-delete-sale btn-xs btn-delete-sale" data-toggle="modal" data-target="#deleteSaleModal" data-id="<?php echo (int)$sale['id']; ?>" title="Delete" data-toggle="tooltip">
                       <span class="glyphicon glyphicon-trash"></span>Delete
                     </button>
-                  </div>
+                  </div> -->
                 </td>
               </tr>
             <?php endforeach; ?>

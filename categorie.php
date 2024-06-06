@@ -7,47 +7,65 @@ page_require_level(1);
 $all_categories = find_all('categories');
 ?>
 <?php
- if(isset($_POST['add_cat'])){
-   $req_field = array('categorie-name');
-   validate_fields($req_field);
-   $cat_name = remove_junk($db->escape($_POST['categorie-name']));
-   if(empty($errors)){
-      $sql  = "INSERT INTO categories (name)";
-      $sql .= " VALUES ('{$cat_name}')";
-      if($db->query($sql)){
-        $session->msg("s", "Successfully Added New Category");
-        redirect('categorie.php',false);
-      } else {
-        $session->msg("d", "Sorry Failed to insert.");
-        redirect('categorie.php',false);
-      }
-   } else {
-     $session->msg("d", $errors);
-     redirect('categorie.php',false);
-   }
- }
+function is_alphabetic($str) {
+  return preg_match('/^[a-zA-Z]+$/', $str);
+}
+
+if (isset($_POST['add_cat'])) {
+  $req_field = array('categorie-name');
+  validate_fields($req_field);
+  $cat_name = remove_junk($db->escape($_POST['categorie-name']));
+  if (!is_alphabetic($cat_name)) {
+    $session->msg("d", "Category Name can only contain alphabetical characters.");
+    redirect('categorie.php', false);
+  }
+  if (empty($errors)) {
+    $sql  = "INSERT INTO categories (name)";
+    $sql .= " VALUES ('{$cat_name}')";
+    if ($db->query($sql)) {
+      $session->msg("s", "Successfully Added New Category");
+      redirect('categorie.php', false);
+    } else {
+      $session->msg("d", "Sorry Failed to insert.");
+      redirect('categorie.php', false);
+    }
+  } else {
+    $session->msg("d", $errors);
+    redirect('categorie.php', false);
+  }
+}
 ?>
 <?php include_once('layouts/header.php'); ?>
+
 <!-- Add jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
-
-.sidebar {
-    background-color:  #add8e6;
+  .sidebar {
+    background-color: #add8e6;
   }
-  
+
   body {
     background-color: #add8e6;
   }
+
   .btn-group-vertical .btn {
     background-color: blue;
     color: white;
     border: none;
     margin-bottom: 5px;
   }
+
   .btn-group-vertical .btn:hover {
     background-color: darkblue;
+  }
+
+  .text-danger {
+    color: red;
+  }
+
+  .error {
+    color: red;
   }
 </style>
 
@@ -67,11 +85,13 @@ $all_categories = find_all('categories');
         </strong>
       </div>
       <div class="panel-body">
-        <form method="post" action="categorie.php">
+        <form id="categoryForm" method="post" action="categorie.php">
           <div class="form-group">
+            <label for="categorie-name" class="control-label">Category Name <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="categorie-name" placeholder="Category Name">
+            <span class="error"></span>
           </div>
-          <button type="submit" name="add_cat" class="btn btn-primary"style="background-color:blue;">
+          <button type="submit" name="add_cat" class="btn btn-primary" style="background-color:blue;">
             <span class="glyphicon glyphicon-plus-sign"></span> Add Category
           </button>
         </form>
@@ -104,12 +124,12 @@ $all_categories = find_all('categories');
                 <td><?php echo remove_junk(ucfirst($cat['name'])); ?></td>
                 <td class="text-center">
                   <div class="btn-group btn-group-vertical">
-                    <a href="edit_categorie.php?id=<?php echo (int)$cat['id']; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit">
+                    <a href="verify_editcategory.php?id=<?php echo (int)$cat['id']; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit">
                       <span class="glyphicon glyphicon-edit"></span> Edit
                     </a>
-                    <button type="button" class="btn btn-xs btn-primary btn-delete-category" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo (int)$cat['id']; ?>">
+                    <a href="verify_deletecategory.php?id=<?php echo (int)$cat['id']; ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Delete">
                       <span class="glyphicon glyphicon-trash"></span> Delete
-                    </button>
+                    </a>
                   </div>
                 </td>
               </tr>
@@ -159,7 +179,7 @@ $all_categories = find_all('categories');
   .modal-dialog-centered {
     display: flex;
     align-items: center;
-    min-height: calc(100%  1rem);
+    min-height: calc(100% - 1rem);
   }
 
   .modal-content {
@@ -228,12 +248,26 @@ $all_categories = find_all('categories');
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-
-
 <script>
   $(document).on('click', '.btn-delete-category', function() {
     var categoryId = $(this).data('id');
     $('#confirmDelete').attr('href', 'delete_categorie.php?id=' + categoryId);
+  });
+
+  $('#categoryForm').on('submit', function(event) {
+    var isValid = true;
+    var catName = $('[name="categorie-name"]');
+    var errorSpan = catName.next('.error');
+    if (!catName.val()) {
+      isValid = false;
+      errorSpan.text('This field is required.');
+    } else {
+      errorSpan.text('');
+    }
+
+    if (!isValid) {
+      event.preventDefault();
+    }
   });
 </script>
 
