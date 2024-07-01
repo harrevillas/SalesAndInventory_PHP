@@ -15,10 +15,11 @@ if (isset($_POST['add_cat'])) {
   $req_field = array('categorie-name');
   validate_fields($req_field);
   $cat_name = remove_junk($db->escape($_POST['categorie-name']));
-  if (!is_alphabetic($cat_name)) {
-    $session->msg("d", "Category Name can only contain alphabetical characters.");
+  if (!preg_match('/^[a-zA-Z\s]+$/', $cat_name)) {
+    $session->msg("d", "Category Name can only contain alphabetical characters and spaces.");
     redirect('categorie.php', false);
-  }
+}
+
   if (empty($errors)) {
     $sql  = "INSERT INTO categories (name)";
     $sql .= " VALUES ('{$cat_name}')";

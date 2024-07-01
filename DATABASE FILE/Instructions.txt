@@ -1,0 +1,28 @@
+1. After you finish downloading the project, unzip the project file and head over to your XAMPP directory.
+2. There you’ll find a folder naming “htdocs”.
+3. Inside the “htdocs” folder, paste the project folder (not the .zip one, but the extracted one).
+4. Open your browser
+5. Then, go to URL “http://localhost/phpmyadmin“.
+6. Create a  Database with a name "inventory_system"
+7. Click on the “Import” tab and choose the database file (.sql) which is provided under the folder naming “DATABASE FILE”.
+8. After setting up all these, go to URL “http://localhost/[ ENTER_PROJECT_FOLDER_NAME_HERE ]“
+9. All the login details are provided below in order to use it.
+
+
+
+
+
+
+Database Name: inventory_system
+
+Admin Login Details
+
+Username: Har
+Password: Har123
+
+
+User(Employee) Login Details
+
+Username: User
+Password: User123
+

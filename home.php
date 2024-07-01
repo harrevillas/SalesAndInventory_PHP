@@ -41,7 +41,31 @@ if (!$session->isUserLoggedIn(true)) {redirect('index.php', false);}
     position: relative;
     z-index: 1;
     font-weight: bold;
-  }
+    font-family: 'Georgia', serif; /* Example font, use one that fits your design */
+    font-size: 80px; /* Adjust size as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    padding: 10px 20px; /* Padding around the text */
+    border-radius: 10px; /* Rounded corners */
+    display: inline-block;
+    opacity: 0; /* Start with hidden text */
+    animation: fadeInOut 5s ease-in-out; /* Animation for fade in and out */
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 </style>
 
 <div class="welcome-container">

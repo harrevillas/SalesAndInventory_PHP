@@ -25,15 +25,15 @@ if (isset($_POST['product'])) {
   $req_fields = array('product-code','product-title', 'product-categorie', 'product-quantity', 'saleing-price');
   validate_fields($req_fields);
 
-  if (!preg_match('/^[0-9]+$/', $_POST['product-code'])) {
-    $session->msg('d', 'Product code can only contain numerical values.');
-    redirect('product.php', false);
-  }
+  if (!preg_match('/^[0-9,-]+$/', $_POST['product-code'])) {
+    $session->msg('d', 'Product code can only contain numerical values, commas, and hyphens.');
+    redirect('add_product.php', false);
+}
   // Validate product title format
-  if (!preg_match('/^[a-zA-Z]+$/', $_POST['product-title'])) {
-    $session->msg('d', 'Product title can only contain alphabetical characters.');
-    redirect('product.php', false);
-  }
+  if (!preg_match('/^[a-zA-Z ]+$/', $_POST['product-title'])) {
+    $session->msg('d', 'Product title can only contain alphabetical characters and spaces.');
+    redirect('add_product.php', false);
+}
 
   if (empty($errors)) {
     $p_code  = remove_junk($db->escape($_POST['product-code']));

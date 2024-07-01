@@ -47,7 +47,7 @@
     </div>
   </div>
 </div>
-
+<!--
 <?php
   $page_title = 'Monthly Sales';
   $year = date('Y');
@@ -146,5 +146,5 @@
     </div>
   </div>
 </div>
-
+            -->
 <?php include_once('layouts/footer.php'); ?>

@@ -3,7 +3,9 @@ $page_title = 'All Product';
 require_once('includes/load.php');
 // Check what level user has permission to view this page
 page_require_level(2);
-$products = join_product_table();
+$categories = find_all('categories');
+$selected_category = isset($_GET['category']) ? (int)$_GET['category'] : null;
+$products = join_product_table($selected_category);
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -83,6 +85,20 @@ $products = join_product_table();
             <span class="glyphicon glyphicon-plus-sign"></span> Add New
           </a>
         </div>
+        <div class="pull-right" style="margin-right: 10px;">
+          <form action="product.php" method="GET" class="form-inline">
+            <div class="form-group">
+              <select name="category" class="form-control" onchange="this.form.submit()">
+                <option value="">Select Category</option>
+                <?php foreach ($categories as $category): ?>
+                  <option value="<?php echo $category['id']; ?>" <?php echo ($category['id'] == $selected_category) ? 'selected' : ''; ?>>
+                    <?php echo remove_junk($category['name']); ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="panel-body">
         <table class="table table-bordered">
@@ -102,7 +118,7 @@ $products = join_product_table();
           <tbody>
             <?php foreach ($products as $product) : ?>
               <!-- Check if product quantity is low and apply alert class -->
-              <tr <?php echo ($product['quantity'] <= 10) ? 'class="low-stock-alert"' : ''; ?>>
+              <tr <?php echo ($product['quantity'] <= 3) ? 'class="low-stock-alert"' : ''; ?>>
                 <td class="text-center"><?php echo count_id(); ?></td>
                 <td> <?php echo remove_junk($product['code']); ?></td>
                 <td>
@@ -117,7 +133,7 @@ $products = join_product_table();
                 <td class="text-center">
                   <?php echo remove_junk($product['quantity']); ?>
                   <!-- Display warning icon if quantity is low -->
-                  <?php if ($product['quantity'] <= 10) : ?>
+                  <?php if ($product['quantity'] <= 3) : ?>
                     <span class="glyphicon glyphicon-alert" title="Low Stock"></span>
                   <?php endif; ?> 
                 <td class="text-center"> <?php echo remove_junk($product['sale_price']); ?></td>

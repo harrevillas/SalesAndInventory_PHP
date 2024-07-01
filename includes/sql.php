@@ -220,17 +220,19 @@ function find_by_username($username) {
    /* Function for Finding all product name
    /* JOIN with categorie  and media database table
    /*--------------------------------------------------------------*/
-  function join_product_table(){
-     global $db;
-     $sql  =" SELECT p.id,p.code,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.date,c.name";
-    $sql  .=" AS categorie,m.file_name AS image";
-    $sql  .=" FROM products p";
-    $sql  .=" LEFT JOIN categories c ON c.id = p.categorie_id";
-    $sql  .=" LEFT JOIN media m ON m.id = p.media_id";
-    $sql  .=" ORDER BY p.id ASC";
+   function join_product_table($category_id = null){
+    global $db;
+    $sql  = "SELECT p.id,p.code,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.date,c.name AS categorie,m.file_name AS image";
+    $sql .= " FROM products p";
+    $sql .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+    $sql .= " LEFT JOIN media m ON m.id = p.media_id";
+    if ($category_id) {
+        $sql .= " WHERE p.categorie_id = " . $db->escape((int)$category_id);
+    }
+    $sql .= " ORDER BY p.id ASC";
     return find_by_sql($sql);
-
-   }
+ }
+ 
   /*--------------------------------------------------------------*/
   /* Function for Finding all product name
   /* Request coming from ajax.php for auto suggest

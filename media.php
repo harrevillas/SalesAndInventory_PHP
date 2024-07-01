@@ -155,6 +155,7 @@ if (isset($_POST['submit'])) {
               </tr>
             <?php endforeach; ?>
           </tbody>
+          <tfoot>
           <tr>
             <td colspan="9" class="text-center">
               <a href="#top-of-page" class="btn btn-info"style="background-color:blue;" onclick="topFunction()">
@@ -162,6 +163,7 @@ if (isset($_POST['submit'])) {
               </a>
             </td>
           </tr>
+            </tfoot>
         </table>
       </div>
     </div>
